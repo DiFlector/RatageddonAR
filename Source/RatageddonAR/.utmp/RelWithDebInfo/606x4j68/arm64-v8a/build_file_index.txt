@@ -1,0 +1,2 @@
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
