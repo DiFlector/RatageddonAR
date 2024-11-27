@@ -150,7 +150,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// Event invoked after an object is spawned.
         /// </summary>
         /// <seealso cref="TrySpawnObject"/>
-        public event Action<GameObject> objectSpawned;
+        public Action<GameObject> objectSpawned;
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
