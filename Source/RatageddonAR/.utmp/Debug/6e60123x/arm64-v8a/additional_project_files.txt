@@ -1,0 +1,17 @@
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\GAToUnityCallbacks.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\MacroEnd.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\MacroHeaderBegin.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\MacroSourceBegin.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGAApplication.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGAConfiguration.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGADebug.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGAEvents.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGAInput.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboard.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboardCallbacks.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGATypes.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UGAVersion.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UnityToGACallbacks.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UnityToGAConfigurationCallbacks.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UnityToGAKeyEventCallbacks.h
+C:\Codes\RatageddonAR\Source\RatageddonAR\Library\PramData\AndroidApplicationController\Cache\com.unity.template.ar_mobile\gradle-project\unityLibrary\src\main\cpp\GameActivity\UnityToGAMotionEventCallbacks.h
