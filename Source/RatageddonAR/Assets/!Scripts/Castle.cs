@@ -1,15 +1,19 @@
+using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Castle : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+{ 
+    public Button PlaceButton => _placeButton;
+    [SerializeField] private Button _placeButton;
+
+    private void OnEnable()
     {
-        
+        _placeButton.onClick.AddListener(CreatePath);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CreatePath()
     {
         
     }
