@@ -11,6 +11,8 @@ public class PlaceObjects : MonoBehaviour
     private Transform _kitchen;
     private Transform _castle;
 
+    [SerializeField] private GameObject _explotionFX;
+
     private void Awake()
     {
         FindFirstObjectByType<ObjectSpawner>().objectSpawned += HandleSpawnedObject;
@@ -23,8 +25,8 @@ public class PlaceObjects : MonoBehaviour
             _kitchen = _interactable.transform;
         if (_interactable.GetComponentInChildren<Castle>() != null)
             _castle = _interactable.transform;
-        _interactable.hoverEntered.AddListener((e) => Take());
-        _interactable.hoverExited.AddListener((e) => Place());
+        _interactable.selectEntered.AddListener((e) => Take());
+        _interactable.selectExited.AddListener((e) => Place());
     }
 
     private void Place()
@@ -42,7 +44,11 @@ public class PlaceObjects : MonoBehaviour
         if (_interactable.GetComponentInChildren<Kitchen>() != null)
             _viewManager.GetView<MainView>().TryGetUIElement<TaskLabel>().ShowKitchenButton();
         if (Physics.Raycast(_interactable.transform.position, Vector3.down, out RaycastHit hit, 10))
+        {
             _interactable.transform.position = hit.point;
+            Instantiate(_explotionFX, hit.point, Quaternion.identity);
+        }
+
         _interactable.transform.rotation = Quaternion.identity;
     }
 
