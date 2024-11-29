@@ -10,13 +10,14 @@ public class Canon : MonoBehaviour
     [SerializeField] private float _launchForce = 10f;
     [SerializeField] private Vector3 _initialAngle = new Vector3(45, 0, 0);
 
-    private void FixedUpdate()
+    private void Awake()
     {
         DrawTrajectory();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            LaunchProjectile();
-        }
+    }
+
+    public void ChangeTrajectory(Vector2 joystickInput)
+    {
+
     }
 
     private void DrawTrajectory()

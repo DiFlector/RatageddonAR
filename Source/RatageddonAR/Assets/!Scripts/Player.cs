@@ -8,9 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private InputAction _input;
     public Transform ItemAnchor => _anchor;
     [SerializeField] private Transform _anchor;
+
     private void Awake()
     {
+#if UNITY_EDITOR
+        Application.targetFrameRate = 200;
+#else
         Application.targetFrameRate = 60;
+#endif
         Input.gyro.enabled = true;
         _input.Enable();
         _input.performed += Interact;
