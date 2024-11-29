@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LuckyBox : MonoBehaviour, IInteractable
 {
@@ -10,6 +11,7 @@ public class LuckyBox : MonoBehaviour, IInteractable
     [SerializeField] private float _shakeCooldown = 1f;
     [SerializeField, Min(1)] private int _shakesForExplode = 3;
     [SerializeField] private ParticleSystem _explosion;
+    [SerializeField] private Button _babax;
 
     private Vector3 _lastAcceleration;
     private float _lastShakeTime;
@@ -17,6 +19,7 @@ public class LuckyBox : MonoBehaviour, IInteractable
     private bool _isTaken = false;
     public void Interact(Player interactor)
     {
+        _babax.onClick.AddListener(() => StartCoroutine(Explode()));
         _lastAcceleration = Input.acceleration;
         _lastShakeTime = Time.time;
         if (!_isTaken)
@@ -53,6 +56,7 @@ public class LuckyBox : MonoBehaviour, IInteractable
 
     private IEnumerator Explode()
     {
+        _explosion.transform.parent = null;
         _explosion.Play();
         transform.DOScale(Vector3.zero, _explosion.main.duration * 0.7f);
         while (DOTween.IsTweening(transform))
