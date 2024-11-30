@@ -5,6 +5,7 @@ using Zenject;
 public class GameManager : MonoBehaviour
 {
     [Inject] private readonly ViewManager _viewManager;
+    [Inject] private readonly GameManager _gameManager;
     [SerializeField] private List<ScriptableObject> _tasks;
     private int _taskIndex;
 

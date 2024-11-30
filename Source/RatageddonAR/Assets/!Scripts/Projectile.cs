@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IIngredient
+public class Projectile : MonoBehaviour, IIngredient, IInteractable
 {
     public int Damage => _damage;
     [SerializeField] private int _damage;
@@ -8,6 +8,11 @@ public class Projectile : MonoBehaviour, IIngredient
     [SerializeField] private int _shotStrength;
     public float ExplosionRadius => _explosionRadius;
     [SerializeField] private float _explosionRadius;
+
+    public void Interact(Player player)
+    {
+        
+    }
 }
 
 public interface IIngredient

@@ -7,6 +7,7 @@ using Zenject;
 public class PlaceObjects : MonoBehaviour
 {
     [Inject] private readonly GameManager _gameManager;
+    [Inject] private readonly ViewManager _viewManager;
 
     private XRGrabInteractable _interactable;
     private RoadGenerator _roadGenerator => GetComponent<RoadGenerator>();
@@ -46,21 +47,19 @@ public class PlaceObjects : MonoBehaviour
             if (Vector3.Distance(Kitchen.transform.position, Castle.transform.position) > 1 &&
                 Vector3.Distance(Kitchen.transform.position, Castle.transform.position) < 2)
             {
-
                 Castle.PlaceButton.gameObject.SetActive(true);
+                _interactable.transform.LookAt(Kitchen.transform.position);
             }
         }
         else if (Kitchen != null)
+        {
             Kitchen.PlaceButton.gameObject.SetActive(true);
+            _interactable.transform.LookAt(transform.position);
+        }
         if (Physics.Raycast(_interactable.transform.position, Vector3.down, out RaycastHit hit, 10))
         {
             _interactable.transform.position = hit.point;
             Instantiate(_explotionFX, hit.point, Quaternion.identity);
-        }
-
-        if (Castle != null)
-        {
-            _interactable.transform.LookAt(Kitchen.transform.position);
         }
         _interactable.transform.eulerAngles = new Vector3(0, _interactable.transform.eulerAngles.y, 0);
     }
@@ -80,6 +79,7 @@ public class PlaceObjects : MonoBehaviour
             Kitchen.PlaceButton.gameObject.SetActive(false);
             Kitchen.GetComponent<XRGrabInteractable>().enabled = false;
             _gameManager.GetTask<PreparationTask>().ConfirmKitchenPlacement();
+            _viewManager.GetView<BattleView>().ConnectToCanon(Kitchen.Canon);
         }
         else
         {
@@ -87,6 +87,7 @@ public class PlaceObjects : MonoBehaviour
             Castle.PlaceButton.gameObject.SetActive(false);
             _gameManager.GetTask<PreparationTask>().ConfirmCastlePlacement();
             _roadGenerator.GenerateRoad(Castle.transform, Kitchen.transform);
+            Kitchen.transform.LookAt(Castle.transform.position);
         }
 
     }

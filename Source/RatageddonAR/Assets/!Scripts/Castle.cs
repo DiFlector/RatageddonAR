@@ -7,14 +7,4 @@ public class Castle : MonoBehaviour
 { 
     public Button PlaceButton => _placeButton;
     [SerializeField] private Button _placeButton;
-
-    private void OnEnable()
-    {
-        _placeButton.onClick.AddListener(CreatePath);
-    }
-
-    private void CreatePath()
-    {
-        
-    }
 }

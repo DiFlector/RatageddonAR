@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public Transform ItemAnchor => _anchor;
     [SerializeField] private Transform _anchor;
 
+    public IInteractable ItemInHand { get; private set; }
+
     private void Awake()
     {
 #if UNITY_EDITOR
@@ -29,7 +31,11 @@ public class Player : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log("HIT");
-            hit.collider.GetComponent<IInteractable>()?.Interact(this);
+            if (hit.collider.GetComponent<IInteractable>() != null)
+            {
+                hit.collider.GetComponent<IInteractable>().Interact(this);
+                ItemInHand = hit.collider.GetComponent<IInteractable>();
+            }
         }
     }
 }

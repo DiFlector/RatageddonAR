@@ -71,5 +71,5 @@ public class LuckyBox : MonoBehaviour, IInteractable
 
 public interface IInteractable
 {
-    public void Interact(Player interactor);
+    public void Interact(Player player);
 }
