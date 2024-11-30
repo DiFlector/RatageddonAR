@@ -3,30 +3,28 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-public class LuckyBox : MonoBehaviour, IInteractable
+public class LuckyBox : PickableObject, IInteractable
 {
     public event Action OnExplode;
+
     [SerializeField] private float _shakeThreshold = 2f;
     [SerializeField] private float _shakeCooldown = 1f;
     [SerializeField, Min(1)] private int _shakesForExplode = 3;
     [SerializeField] private ParticleSystem _explosion;
-    [SerializeField] private Button _babax;
 
     private Vector3 _lastAcceleration;
     private float _lastShakeTime;
 
     private bool _isTaken = false;
-    public void Interact(Player interactor)
+    public override void Interact(Player player)
     {
-        _babax.onClick.AddListener(() => StartCoroutine(Explode()));
+        base.Interact(player);
+        OnExplode += player.GetRandomIngredient;
+        player.Babax.onClick.AddListener(() => StartCoroutine(Explode()));
         _lastAcceleration = Input.acceleration;
         _lastShakeTime = Time.time;
-        if (!_isTaken)
-        {
-            _isTaken = true;
-            StartCoroutine(Translate(interactor));
-        }
         Debug.Log("INTERACT");
     }
 
@@ -56,16 +54,22 @@ public class LuckyBox : MonoBehaviour, IInteractable
 
     private IEnumerator Explode()
     {
+        _explosion.gameObject.SetActive(true);
         _explosion.transform.parent = null;
         _explosion.Play();
         transform.DOScale(Vector3.zero, _explosion.main.duration * 0.7f);
         while (DOTween.IsTweening(transform))
             yield return null;
+        
         OnExplode?.Invoke();
         Invoke(nameof(DestroyObj), _explosion.main.duration * 0.3f);
     }
 
-    private void DestroyObj() => Destroy(gameObject);
+    private void DestroyObj()
+    {
+        Destroy(gameObject);
+        Destroy(_explosion.gameObject);
+    }
 }
 
 

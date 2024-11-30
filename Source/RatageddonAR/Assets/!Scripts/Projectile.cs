@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IIngredient, IInteractable
+public class Projectile : PickableObject, IIngredient, IInteractable
 {
     public int Damage => _damage;
     [SerializeField] private int _damage;
@@ -9,9 +9,9 @@ public class Projectile : MonoBehaviour, IIngredient, IInteractable
     public float ExplosionRadius => _explosionRadius;
     [SerializeField] private float _explosionRadius;
 
-    public void Interact(Player player)
+    public override void Interact(Player player)
     {
-        
+        base.Interact(player);
     }
 }
 

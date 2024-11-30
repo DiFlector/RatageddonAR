@@ -22,6 +22,7 @@ public class PlaceObjects : MonoBehaviour
         FindFirstObjectByType<ObjectSpawner>().objectSpawned += HandleSpawnedObject;
     }
 
+
     private void HandleSpawnedObject(GameObject obj)
     {
         _interactable = obj.GetComponent<XRGrabInteractable>();

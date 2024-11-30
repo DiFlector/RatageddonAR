@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -5,7 +6,6 @@ public class Canon : MonoBehaviour, IInteractable
 {
     [Inject] private readonly ViewManager _viewManager;
     [SerializeField] private Transform _launchPoint;
-    [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private LineRenderer _trajectoryLine;
     [SerializeField] private int _resolution = 15;
     [SerializeField] private int _maxYAngleAbs = 30;
@@ -20,17 +20,18 @@ public class Canon : MonoBehaviour, IInteractable
     private void Awake()
     {
         DrawTrajectory();
-        _projectile = _projectilePrefab.GetComponent<Projectile>();
-        _maxLaunchForce = _projectile.ShotStrength;
     }
 
 
     public void Interact(Player player)
     {
+        _trajectoryLine.enabled = true;
         if (player.ItemInHand is not Projectile) return;
         _projectile = player.ItemInHand as Projectile;
-        _projectilePrefab = _projectile.gameObject;
+        _projectile.transform.parent = null;
+        _projectile.transform.DOMove(_launchPoint.position, 1).SetEase(Ease.InOutSine).onComplete += () => _projectile.transform.parent = _launchPoint;
         _maxLaunchForce = _projectile.ShotStrength;
+        player.ClearItem();
     }
 
     public void ChangeTrajectory(Vector2 joystickInput)
@@ -48,6 +49,7 @@ public class Canon : MonoBehaviour, IInteractable
 
     private void DrawTrajectory()
     {
+        if (!_trajectoryLine.enabled) return;
         Vector3[] trajectoryPoints = CalculateTrajectory();
         _trajectoryLine.positionCount = trajectoryPoints.Length;
         _trajectoryLine.SetPositions(trajectoryPoints);
@@ -75,14 +77,15 @@ public class Canon : MonoBehaviour, IInteractable
     {
         if (_projectile == null) return;
         _anim.Play();
-        GameObject projectile = Instantiate(_projectilePrefab, _launchPoint.position, Quaternion.identity);
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        Rigidbody rb = _projectile.GetComponent<Rigidbody>();
         Vector3 localDirection = Quaternion.Euler(_localAngle) * Vector3.forward;
         Vector3 globalDirection = transform.TransformDirection(localDirection);
         Vector3 velocity = globalDirection * _launchForce;
+        rb.isKinematic = false;
         rb.linearVelocity = velocity;
         rb.useGravity = true;
         _projectile = null;
+        _trajectoryLine.enabled = false;
     }
 
 }
