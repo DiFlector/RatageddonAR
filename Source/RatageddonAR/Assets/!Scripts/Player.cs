@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(PlaceObjects))]
 public class Player : MonoBehaviour
 {
+    [Inject] private readonly ViewManager _viewManager;
     public PlaceObjects PlaceObjects => GetComponent<PlaceObjects>();
     [SerializeField] private InputAction _input;
     public Transform ItemAnchor => _anchor;
     [SerializeField] private Transform _anchor;
 
     [SerializeField] private List<Projectile> _ingredientsPrefabs;
-    public Button Babax;
 
     public PickableObject ItemInHand { get; private set; } = null;
 
@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
         Projectile proj = Instantiate(_ingredientsPrefabs[randIndex].gameObject, _anchor).GetComponent<Projectile>();
         proj.Init(this);
         ItemInHand = proj;
+    }
+
+    public void ToggleJoystick(bool show)
+    {
+        _viewManager.GetView<BattleView>().ShowJoystick(show);
     }
 
     private IEnumerator AnimatePickup(Transform item)

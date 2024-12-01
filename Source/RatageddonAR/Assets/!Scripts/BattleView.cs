@@ -9,6 +9,7 @@ public class BattleView : View
 
     public override void Initialize()
     {
+        _joystick.gameObject.SetActive(false);
         _gameManager.GetTask<PreparationTask>().OnTaskCompleted += () => _viewManager.Show<BattleView>(true, false);
     }
 
@@ -18,9 +19,14 @@ public class BattleView : View
         _canon = canon;
     }
 
+    public void ShowJoystick(bool show)
+    {
+        _joystick.gameObject.SetActive(show);
+    }
+
     private void FixedUpdate()
     {
         if (_canon == null) return;
-        _canon.ChangeTrajectory(new Vector2(_joystick.Horizontal, _joystick.Vertical));
+            _canon.ChangeTrajectory(new Vector2(_joystick.Horizontal, _joystick.Vertical));
     }
 }

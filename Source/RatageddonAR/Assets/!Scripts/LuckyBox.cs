@@ -25,7 +25,6 @@ public class LuckyBox : PickableObject, IInteractable
         base.Interact(player);
         _player = player;
         OnExplode += player.GetRandomIngredient;
-        player.Babax.onClick.AddListener(() => StartCoroutine(Explode()));
         _lastAcceleration = Input.acceleration;
         _lastShakeTime = Time.time;
         Debug.Log("INTERACT");

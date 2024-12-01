@@ -101,7 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemAnchor: {fileID: 7135461676013147296}
+  _text: {fileID: 0}
   tiltSensitivity: 10
+  _rotationLimit: 10
+  _threshold: 0.1
 --- !u!1 &3941034710436039687
 GameObject:
   m_ObjectHideFlags: 0

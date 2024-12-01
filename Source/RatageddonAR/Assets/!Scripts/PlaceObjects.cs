@@ -28,15 +28,20 @@ public class PlaceObjects : MonoBehaviour
         _interactable = obj.GetComponent<XRGrabInteractable>();
         if (_interactable.GetComponentInChildren<Kitchen>() != null)
         {
+            _interactable.transform.LookAt(transform.position);
             Kitchen = _interactable.GetComponent<Kitchen>();
             Kitchen.PlaceButton.onClick.AddListener(() => ConfirmPlace(true));
         }
         if (_interactable.GetComponentInChildren<Castle>() != null)
         {
             Castle = _interactable.GetComponent<Castle>();
+            if (Vector3.Distance(Kitchen.transform.position, Castle.transform.position) > 1.8f &&
+                Vector3.Distance(Kitchen.transform.position, Castle.transform.position) < 2.5f)
+                Castle.PlaceButton.gameObject.SetActive(false);
+            _interactable.transform.LookAt(Kitchen.transform.position);
             Castle.PlaceButton.onClick.AddListener(() => ConfirmPlace(false));
         }
-
+        _interactable.transform.eulerAngles = new Vector3(0, _interactable.transform.eulerAngles.y, 0);
         _interactable.selectEntered.AddListener((e) => Take());
         _interactable.selectExited.AddListener((e) => Place());
     }

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Pan : MonoBehaviour, IInteractable
@@ -83,7 +84,7 @@ public class Pan : MonoBehaviour, IInteractable
             {
                 // Добавляем время к прогрессу
                 _progress += Time.deltaTime;
-                _progress = Mathf.Clamp(_progress, 0f, 100);
+                _progress = Mathf.Clamp(_progress, 0f, 3);
             }
 
             _lastGyroRotation = currentGyroRotation;
@@ -93,7 +94,7 @@ public class Pan : MonoBehaviour, IInteractable
 
             transform.rotation = initialRotation * Quaternion.Euler(tiltX, tiltY, 0);
 
-            Debug.Log($"Progress (Gyro): {_progress}/{100}");
+            Debug.Log($"Progress (Gyro): {_progress}/{3}");
             
 
 #endif
