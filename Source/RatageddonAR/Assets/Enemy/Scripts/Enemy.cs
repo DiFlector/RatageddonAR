@@ -9,6 +9,7 @@ namespace Enemy.Scripts
     public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _health = 100f;
+        [SerializeField] private ParticleSystem _burningEffect;
         private int _damage = 10;
         public float _attackRange = 2.5f;
         public float _attackRate = 1f;
@@ -17,6 +18,12 @@ namespace Enemy.Scripts
         private IDamageable _kitchen;
         private EnemyAnimator _animator;
         private float _timer;
+        
+        [Header("Damage over time")]
+        [SerializeField] private float _damageTickRate = 1f;
+        [SerializeField] private float _tickDamageDuration = 1f;
+        private Coroutine damageCoroutine;
+        [SerializeField] private AudioSource _audioSource;
 
         private void Start()
         {
@@ -44,28 +51,80 @@ namespace Enemy.Scripts
             _timer = 0;
         }
 
-        public void GetDamage(int damage)
+        public void GetDamage(int damage, DamageType damageType)
         {
-            if (_health - damage <= 0)
+            switch (damageType)
             {
-                StartCoroutine(Die());
+                case DamageType.Burst:
+                    print("Burst");
+                    if (_health - damage <= 0)
+                    {
+                        StartCoroutine(Die());
+                    }
+                    else
+                    {
+                        _animator.PlayHit();
+                        _health -= damage;
+                    }
+                    break;
+                case DamageType.Continuous:
+                    GetDamageOverTime(damage);
+                    break;
             }
-            else
+            
+        }
+
+
+        private void GetDamageOverTime(int damage)
+        {
+            if (damageCoroutine == null)
             {
-                _animator.PlayHit();
-                _health -= damage;
+                damageCoroutine = StartCoroutine(DamageRoutine(damage));
             }
+        }
+
+        private IEnumerator DamageRoutine(int damage)
+        {
+            float elapsedTime = 0f;
+            
+            while (elapsedTime < _tickDamageDuration)
+            {
+                print("Continuous tick");
+                if (_health - damage <= 0)
+                {
+                    StartCoroutine(Die());
+                }
+                else
+                {
+                    _animator.PlayHit();
+                    _health -= damage;
+                }
+                yield return new WaitForSeconds(_damageTickRate); // Ждать интервал
+                elapsedTime += _damageTickRate;
+            }
+            if (_burningEffect)
+            {
+                _burningEffect.Stop();
+            }
+            damageCoroutine = null;
         }
 
         private IEnumerator Die()
         {
             _enemyStates.CurrentState = States.Dead;
+            _audioSource.Play();
             yield return new WaitForSeconds(2);
             transform.DOMoveY(-0.5f, 5).onComplete += () => Destroy(gameObject);
         }
         public void ApplyDamage()
         {
-            _kitchen.GetDamage(_damage);
+            _kitchen.GetDamage(_damage, DamageType.Burst);
         }
     }
+}
+
+public enum DamageType
+{
+    Burst,
+    Continuous
 }
