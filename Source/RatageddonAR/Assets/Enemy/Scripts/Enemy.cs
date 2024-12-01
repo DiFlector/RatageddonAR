@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -57,7 +56,7 @@ namespace Enemy.Scripts
             {
                 case DamageType.Burst:
                     print("Burst");
-                    if (_health - damage <= 0)
+                    if (_health - damage <= 0 && _enemyStates.CurrentState != States.Dead)
                     {
                         StartCoroutine(Die());
                     }
@@ -86,11 +85,12 @@ namespace Enemy.Scripts
         private IEnumerator DamageRoutine(int damage)
         {
             float elapsedTime = 0f;
-            
+            _burningEffect.gameObject.SetActive(true);
+            _burningEffect.Play();
             while (elapsedTime < _tickDamageDuration)
             {
                 print("Continuous tick");
-                if (_health - damage <= 0)
+                if (_health - damage <= 0 && _enemyStates.CurrentState != States.Dead)
                 {
                     StartCoroutine(Die());
                 }

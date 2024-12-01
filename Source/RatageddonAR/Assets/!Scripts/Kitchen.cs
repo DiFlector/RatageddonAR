@@ -22,13 +22,13 @@ public class Kitchen : MonoBehaviour, IDamageable
     private void Awake()
     {
         SpawnLuckyBox();
-        _hpText.text = "��������� �����: " + _hp;
+        _hpText.text = "Здоровье кухни: " + _hp;
     }
 
     private void SpawnLuckyBox()
     {
         _currentBox = Instantiate(_boxPrefab, _boxSpawn).GetComponent<LuckyBox>();
-        _currentBox.OnExplode += SpawnLuckyBox;
+        _currentBox.OnExplode += () => Invoke(nameof(SpawnLuckyBox), 10);
     }
 
     public void GetDamage(int damage, DamageType damageType)
@@ -36,7 +36,7 @@ public class Kitchen : MonoBehaviour, IDamageable
         if (_hp - damage >= 0)
         {
             _hp -= damage;
-            _hpText.text = "��������� �����: " + _hp;
+            _hpText.text = "Здоровье кухни: " + _hp;
         }
         else
             Explode();

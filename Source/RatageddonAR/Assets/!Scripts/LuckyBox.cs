@@ -17,10 +17,13 @@ public class LuckyBox : PickableObject, IInteractable
     private Vector3 _lastAcceleration;
     private float _lastShakeTime;
 
+    private Player _player;
+
     private bool _isExploding = false;
     public override void Interact(Player player)
     {
         base.Interact(player);
+        _player = player;
         OnExplode += player.GetRandomIngredient;
         player.Babax.onClick.AddListener(() => StartCoroutine(Explode()));
         _lastAcceleration = Input.acceleration;
@@ -59,6 +62,7 @@ public class LuckyBox : PickableObject, IInteractable
     {
         if (!_isExploding)
         {
+            _player.ClearItem();
             _isExploding = true;
             _explosion.gameObject.SetActive(true);
             _explosion.transform.parent = null;

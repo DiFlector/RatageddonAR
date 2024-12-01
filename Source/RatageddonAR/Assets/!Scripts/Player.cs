@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     public void GetRandomIngredient()
     {
-        Debug.Log("SPAWNED");
+        if (ItemInHand) return;
         int randIndex = Random.Range(0, _ingredientsPrefabs.Count);
         Projectile proj = Instantiate(_ingredientsPrefabs[randIndex].gameObject, _anchor).GetComponent<Projectile>();
         proj.Init(this);
