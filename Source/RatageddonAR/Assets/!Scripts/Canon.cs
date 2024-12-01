@@ -14,6 +14,7 @@ public class Canon : MonoBehaviour, IInteractable
     [SerializeField] private float _launchForce = 2f;
     [SerializeField] private Vector3 _localAngle = new (-45, 0, 0);
 
+    private Player _player;
     private Projectile _projectile;
 
     private void Awake()
@@ -28,10 +29,12 @@ public class Canon : MonoBehaviour, IInteractable
         _projectile = player.ItemInHand as Projectile;
         if (!_projectile.IsCooked) return;
         _projectile.GetComponentInChildren<Collider>().enabled = true;
+        player.ToggleJoystick(true);
         _trajectoryLine.enabled = true;
         _projectile.transform.parent = null;
         _projectile.transform.DOMove(_launchPoint.position, 1).SetEase(Ease.InOutSine).onComplete += () => _projectile.transform.parent = _launchPoint;
         _maxLaunchForce = _projectile.ShotStrength;
+        _player = player;
         player.ClearItem();
     }
 
@@ -87,6 +90,7 @@ public class Canon : MonoBehaviour, IInteractable
         rb.useGravity = true;
         _projectile = null;
         _trajectoryLine.enabled = false;
+        _player.ToggleJoystick(false);
     }
 
 }

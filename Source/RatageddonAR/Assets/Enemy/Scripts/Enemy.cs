@@ -114,7 +114,7 @@ namespace Enemy.Scripts
             _enemyStates.CurrentState = States.Dead;
             _audioSource.Play();
             yield return new WaitForSeconds(2);
-            transform.DOMoveY(-0.5f, 5).onComplete += () => Destroy(gameObject);
+            transform.DOMoveY(-0.1f, 6).onComplete += () => Destroy(gameObject);
         }
         public void ApplyDamage()
         {

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5955c7d31902d04baa9394dc4ed8cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 9
   _burningEffect: {fileID: 8306489544501385591}
   _attackRange: 0.25
   _attackRate: 3
@@ -380,12 +380,12 @@ PrefabInstance:
     - target: {fileID: 1363747247358219552, guid: aa7a584697bce574583f0a46c654f2e9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.121
       objectReference: {fileID: 0}
     - target: {fileID: 1363747247358219552, guid: aa7a584697bce574583f0a46c654f2e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 1363747247358219552, guid: aa7a584697bce574583f0a46c654f2e9,
         type: 3}
