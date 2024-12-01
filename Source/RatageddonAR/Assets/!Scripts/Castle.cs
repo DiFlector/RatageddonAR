@@ -11,7 +11,7 @@ public class Castle : MonoBehaviour
     [SerializeField] private Button _placeButton;
     public EnemySpawner Spawner => _spawner;
     [SerializeField] private EnemySpawner _spawner;
-    [SerializeField] private int _hp;
+    [SerializeField] public int _hp;
     [SerializeField] private TMP_Text _hpText;
 
     public void ApplyDamage(int damage)
@@ -19,7 +19,7 @@ public class Castle : MonoBehaviour
         if (_hp - damage >= 0)
         {
             _hp -= damage;
-            _hpText.text = "Здоровье замка: " + _hp;
+            _hpText.text = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + _hp;
             Debug.Log(_hp);
         }
         else

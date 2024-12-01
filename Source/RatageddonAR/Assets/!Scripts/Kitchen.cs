@@ -16,7 +16,7 @@ public class Kitchen : MonoBehaviour, IDamageable
     public Pan Pan => _pan;
     [SerializeField] private Pan _pan;
 
-    [SerializeField] private int _hp;
+    [SerializeField] public int _hp;
     [SerializeField] private TMP_Text _hpText;
 
     private void Awake()

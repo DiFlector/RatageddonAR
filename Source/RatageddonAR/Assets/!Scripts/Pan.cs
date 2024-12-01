@@ -12,7 +12,7 @@ public class Pan : MonoBehaviour, IInteractable
     [SerializeField] private float _threshold;
     private Vector3 _lastGyroRotation;
     private Vector3 _lastMousePosition;
-    private float _progress = 0f;
+    public float _progress = 0f;
     private Projectile _item;
     private Player _player;
 
@@ -82,7 +82,7 @@ public class Pan : MonoBehaviour, IInteractable
                     Mathf.Abs(currentGyroRotation.y) > _threshold ||
                     Mathf.Abs(currentGyroRotation.z) > _threshold)
             {
-                // Добавляем время к прогрессу
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 _progress += Time.deltaTime;
                 _progress = Mathf.Clamp(_progress, 0f, 3);
             }
