@@ -190,9 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5955c7d31902d04baa9394dc4ed8cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 100
+  _burningEffect: {fileID: 0}
   _attackRange: 0.25
   _attackRate: 3
+  _damageTickRate: 1
+  _tickDamageDuration: 5
 --- !u!114 &2374856995760578654
 MonoBehaviour:
   m_ObjectHideFlags: 0

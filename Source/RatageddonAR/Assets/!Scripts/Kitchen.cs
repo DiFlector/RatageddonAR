@@ -22,7 +22,7 @@ public class Kitchen : MonoBehaviour, IDamageable
     private void Awake()
     {
         SpawnLuckyBox();
-        _hpText.text = "Прочность кухни: " + _hp;
+        _hpText.text = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + _hp;
     }
 
     private void SpawnLuckyBox()
@@ -31,12 +31,12 @@ public class Kitchen : MonoBehaviour, IDamageable
         _currentBox.OnExplode += SpawnLuckyBox;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(int damage, DamageType damageType)
     {
         if (_hp - damage >= 0)
         {
             _hp -= damage;
-            _hpText.text = "Прочность кухни: " + _hp;
+            _hpText.text = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + _hp;
         }
         else
             Explode();

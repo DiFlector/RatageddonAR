@@ -19,7 +19,7 @@ namespace Enemy.Scripts
 
         private void Update()
         {
-            Press();
+            //Press();
         }
 
         private void Press()
@@ -29,11 +29,20 @@ namespace Enemy.Scripts
                 _enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
                 foreach (var enemy in _enemy)
                 {
-                    //enemy.GetDamage(50f);
+                    enemy.GetDamage(10, DamageType.Burst);
                 }
                 //_enemyStates.CurrentState = States.Attack;
                 //print(_enemyAnimator.GetAnimationClipDuration("Zombie Attack"));
                 //_enemyStates.CurrentState = States.Moving;
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                _enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+                foreach (var enemy in _enemy)
+                {
+                    enemy.GetDamage(10, DamageType.Continuous);
+                }
             }
         }
     }

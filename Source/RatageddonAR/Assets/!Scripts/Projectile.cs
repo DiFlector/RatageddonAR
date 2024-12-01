@@ -10,6 +10,8 @@ public class Projectile : PickableObject, IIngredient, IInteractable
     [SerializeField] private int _shotStrength;
     public float ExplosionRadius => _explosionRadius;
     [SerializeField] private float _explosionRadius;
+    
+    private DamageType _damageType = DamageType.Burst;
 
     public override void Interact(Player player)
     {
@@ -25,7 +27,7 @@ public class Projectile : PickableObject, IIngredient, IInteractable
             {
                 if (collider.TryGetComponent(out IDamageable dmgbl))
                 {
-                    dmgbl.GetDamage(_damage);
+                    dmgbl.GetDamage(_damage, _damageType);
                     Destroy(gameObject);
                 }
             }
@@ -55,7 +57,7 @@ public class Projectile : PickableObject, IIngredient, IInteractable
             {
                 if (collider.TryGetComponent(out IDamageable dmgbl))
                 {
-                    dmgbl.GetDamage(_damage);
+                    dmgbl.GetDamage(_damage, _damageType);
                     Destroy(gameObject);
                 }
             }

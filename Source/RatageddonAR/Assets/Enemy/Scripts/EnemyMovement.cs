@@ -12,6 +12,7 @@ namespace Enemy.Scripts
             _agent = GetComponent<NavMeshAgent>();
             _enemyStates = GetComponent<EnemyStates>();
             _agent.destination = FindAnyObjectByType<Kitchen>().transform.position;
+            //_agent.destination = GameObject.Find("point").transform.position;
         }
 
         private void Update()
