@@ -29,7 +29,7 @@ namespace Enemy.Scripts
                 _enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
                 foreach (var enemy in _enemy)
                 {
-                    enemy.GetDamage(50f);
+                    //enemy.GetDamage(50f);
                 }
                 //_enemyStates.CurrentState = States.Attack;
                 //print(_enemyAnimator.GetAnimationClipDuration("Zombie Attack"));

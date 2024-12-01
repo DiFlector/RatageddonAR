@@ -17,7 +17,7 @@ public class LuckyBox : PickableObject, IInteractable
     private Vector3 _lastAcceleration;
     private float _lastShakeTime;
 
-    private bool _isTaken = false;
+    private bool _isExploding = false;
     public override void Interact(Player player)
     {
         base.Interact(player);
@@ -48,21 +48,28 @@ public class LuckyBox : PickableObject, IInteractable
             _lastShakeTime = Time.time;
         }
         if (_shakesForExplode == 0)
+        {
             StartCoroutine(Explode());
+            _shakesForExplode = -1;
+        }
         _lastAcceleration = currentAcceleration;
     }
 
     private IEnumerator Explode()
     {
-        _explosion.gameObject.SetActive(true);
-        _explosion.transform.parent = null;
-        _explosion.Play();
-        transform.DOScale(Vector3.zero, _explosion.main.duration * 0.7f);
-        while (DOTween.IsTweening(transform))
-            yield return null;
-        
-        OnExplode?.Invoke();
-        Invoke(nameof(DestroyObj), _explosion.main.duration * 0.3f);
+        if (!_isExploding)
+        {
+            _explosion.gameObject.SetActive(true);
+            _explosion.transform.parent = null;
+            _explosion.Play();
+            transform.DOScale(Vector3.zero, _explosion.main.duration * 0.7f);
+            while (DOTween.IsTweening(transform))
+                yield return null;
+
+            Debug.Log("INVOKE");
+            OnExplode?.Invoke();
+            Invoke(nameof(DestroyObj), _explosion.main.duration * 0.3f);
+        }
     }
 
     private void DestroyObj()

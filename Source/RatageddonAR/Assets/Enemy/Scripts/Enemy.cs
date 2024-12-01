@@ -1,4 +1,6 @@
+using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +9,7 @@ namespace Enemy.Scripts
     public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _health = 100f;
-        private float _damage = 10f;
+        private int _damage = 10;
         public float _attackRange = 2.5f;
         public float _attackRate = 1f;
         private EnemyStates _enemyStates;
@@ -22,7 +24,7 @@ namespace Enemy.Scripts
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<EnemyAnimator>();
             _animator.AttackEvent.AddListener(ApplyDamage);
-            //_kitchen = FindAnyObjectByType<Kitchen>();
+            _kitchen = FindAnyObjectByType<Kitchen>() as IDamageable;
         }
 
         private void Update()
@@ -42,11 +44,11 @@ namespace Enemy.Scripts
             _timer = 0;
         }
 
-        public void GetDamage(float damage)
+        public void GetDamage(int damage)
         {
             if (_health - damage <= 0)
             {
-                _enemyStates.CurrentState = States.Dead;
+                StartCoroutine(Die());
             }
             else
             {
@@ -54,10 +56,16 @@ namespace Enemy.Scripts
                 _health -= damage;
             }
         }
+
+        private IEnumerator Die()
+        {
+            _enemyStates.CurrentState = States.Dead;
+            yield return new WaitForSeconds(2);
+            transform.DOMoveY(-0.5f, 5).onComplete += () => Destroy(gameObject);
+        }
         public void ApplyDamage()
         {
-            print("ApplyDamage");
-            //_kitchen.GetDamage(_damage);
+            _kitchen.GetDamage(_damage);
         }
     }
 }

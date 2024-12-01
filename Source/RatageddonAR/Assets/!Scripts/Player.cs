@@ -51,13 +51,14 @@ public class Player : MonoBehaviour
 
     public void GetRandomIngredient()
     {
+        Debug.Log("SPAWNED");
         int randIndex = Random.Range(0, _ingredientsPrefabs.Count);
         ItemInHand = Instantiate(_ingredientsPrefabs[randIndex].gameObject, _anchor).GetComponent<PickableObject>();
     }
 
     private IEnumerator AnimatePickup(Transform item)
     {
-        float duration = 1;
+        float duration = 0.4f;
         float timeElapsed = 0;
         Vector3 startPos = item.position;
         while (timeElapsed / duration < 1)

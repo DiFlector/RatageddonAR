@@ -4,7 +4,6 @@ using Zenject;
 
 public class Canon : MonoBehaviour, IInteractable
 {
-    [Inject] private readonly ViewManager _viewManager;
     [SerializeField] private Transform _launchPoint;
     [SerializeField] private LineRenderer _trajectoryLine;
     [SerializeField] private int _resolution = 15;

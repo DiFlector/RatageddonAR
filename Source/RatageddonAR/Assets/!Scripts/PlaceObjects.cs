@@ -84,8 +84,11 @@ public class PlaceObjects : MonoBehaviour
         }
         else
         {
-            Castle.GetComponent<XRGrabInteractable>().enabled = false;
             Castle.PlaceButton.gameObject.SetActive(false);
+            Castle.GetComponent<Collider>().isTrigger = true;
+            Destroy(Castle.GetComponent<XRGrabInteractable>());
+            Destroy(Castle.GetComponent<Rigidbody>());
+            Castle.Spawner.StartSpawn();
             _gameManager.GetTask<PreparationTask>().ConfirmCastlePlacement();
             _roadGenerator.GenerateRoad(Castle.transform, Kitchen.transform);
             Kitchen.transform.LookAt(Castle.transform.position);
