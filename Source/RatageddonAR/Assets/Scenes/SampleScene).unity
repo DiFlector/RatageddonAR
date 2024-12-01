@@ -3988,6 +3988,7 @@ MonoBehaviour:
   _anchor: {fileID: 780784354}
   _ingredientsPrefabs:
   - {fileID: -4150475677175909652, guid: bb8a7cf9568e85243ad9890c73b5fe0c, type: 3}
+  - {fileID: 9210621510747967138, guid: 82ebcc49d55a93d49ae9f3645856969f, type: 3}
 --- !u!114 &1109768762
 MonoBehaviour:
   m_ObjectHideFlags: 0
