@@ -19,10 +19,8 @@ public class Castle : MonoBehaviour
         if (_hp - damage >= 0)
         {
             _hp -= damage;
-            _hpText.text = "�������� �����: " + _hp;
-            Debug.Log(_hp);
+            _hpText.text = "Здоровье замка: " + _hp;
         }
-        else
-            Debug.Log("proigrali");
+
     }
 }
