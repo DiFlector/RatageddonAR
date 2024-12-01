@@ -14,6 +14,7 @@ namespace Enemy.Scripts
             get => _currentState;
             set
             {
+                if (_currentState == value) return;
                 _currentState = value;
                 UpdateState();
             }
@@ -25,13 +26,13 @@ namespace Enemy.Scripts
         {
             _enemyMovement = GetComponent<EnemyMovement>();
             _animator = GetComponent<EnemyAnimator>();
-            _animator.AttackEndEvent.AddListener(() => CurrentState = States.Idle);
+            _animator.AttackEndEvent.AddListener(() => CurrentState = States.Idle );
             CurrentState = States.Idle;
         }
 
         private void UpdateState()
         {
-            print("UpdateState called with state: " + CurrentState);
+            //print("UpdateState called with state: " + CurrentState);
             switch (CurrentState)
             {
                 case States.Moving:

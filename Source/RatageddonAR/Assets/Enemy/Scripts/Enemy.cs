@@ -27,24 +27,15 @@ namespace Enemy.Scripts
 
         private void Update()
         {
-            _animator.SetAttackSpeed(1/_attackRate);
+            //_animator.SetAttackSpeed(1/_attackRate);
             _timer += Time.deltaTime;
             Attack();
         }
 
-        private void CheckAttackRange()
-        {
-            if (_agent.remainingDistance > _attackRange || _enemyStates.CurrentState == States.Attack) return;
-        }
-
         private void Attack()
         {
-            CheckAttackRange();
-            if (_timer <= _attackRate && _enemyStates.CurrentState != States.Idle)
-            {
-                //_enemyStates.CurrentState = States.Idle;
-                return;
-            }
+            if (_agent.remainingDistance > _attackRange) return;
+            if (_timer <= _attackRate) return;
             if (_enemyStates.CurrentState == States.Attack) return;
             _animator.PlayAttack();
             _enemyStates.CurrentState = States.Attack;
@@ -55,7 +46,6 @@ namespace Enemy.Scripts
         {
             if (_health - damage <= 0)
             {
-                print("Dead");
                 _enemyStates.CurrentState = States.Dead;
             }
             else
@@ -67,7 +57,7 @@ namespace Enemy.Scripts
         public void ApplyDamage()
         {
             print("ApplyDamage");
-            _kitchen.GetDamage(_damage);
+            //_kitchen.GetDamage(_damage);
         }
     }
 }

@@ -134,7 +134,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _attackRange: 2.5
-  _attackRate: 1
+  _attackRate: 3
 --- !u!114 &2374856995760578654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,9 @@ MonoBehaviour:
   AttackEvent:
     m_PersistentCalls:
       m_Calls: []
+  AttackEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1073942002648896047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +201,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 2374856995760578654}
+  _currentState: 0

@@ -61,7 +61,7 @@ namespace Enemy.Scripts
             {
                 AttackEvent.Invoke();
             }
-            if (stateInfo.IsName("Zombie Attack") && Mathf.Approximately(stateInfo.normalizedTime, 1f))
+            if (stateInfo.IsName("Zombie Attack") && stateInfo.normalizedTime >= 0.99f)
             {
                 AttackEndEvent.Invoke();
             }

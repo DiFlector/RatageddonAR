@@ -37,7 +37,7 @@ namespace Enemy.Scripts
             else
             {
                 if(_enemyStates.CurrentState == States.Idle) return;
-                //_enemyStates.CurrentState = States.Idle;
+                _enemyStates.CurrentState = States.Idle;
             }
         }
 
