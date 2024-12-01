@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fc8d4c7c87a9c42ada30c80e4fa420, type: 3}
   m_Name: BattleTask
   m_EditorClassIdentifier: 
-  _text: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u044C\u0442\u0435 \u043A\u0440\u044B\u0441!!!"
+  _text: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u044C\u0442\u0435 \u043A\u0440\u044B\u0441"
