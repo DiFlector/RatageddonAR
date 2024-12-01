@@ -23,6 +23,7 @@ namespace Enemy.Scripts
         [SerializeField] private float _damageTickRate = 1f;
         [SerializeField] private float _tickDamageDuration = 1f;
         private Coroutine damageCoroutine;
+        [SerializeField] private AudioSource _audioSource;
 
         private void Start()
         {
@@ -111,6 +112,7 @@ namespace Enemy.Scripts
         private IEnumerator Die()
         {
             _enemyStates.CurrentState = States.Dead;
+            _audioSource.Play();
             yield return new WaitForSeconds(2);
             transform.DOMoveY(-0.5f, 5).onComplete += () => Destroy(gameObject);
         }
