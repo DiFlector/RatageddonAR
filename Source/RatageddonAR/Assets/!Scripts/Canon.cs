@@ -24,9 +24,11 @@ public class Canon : MonoBehaviour, IInteractable
 
     public void Interact(Player player)
     {
-        _trajectoryLine.enabled = true;
         if (player.ItemInHand is not Projectile) return;
         _projectile = player.ItemInHand as Projectile;
+        if (!_projectile.IsCooked) return;
+        _projectile.GetComponentInChildren<Collider>().enabled = true;
+        _trajectoryLine.enabled = true;
         _projectile.transform.parent = null;
         _projectile.transform.DOMove(_launchPoint.position, 1).SetEase(Ease.InOutSine).onComplete += () => _projectile.transform.parent = _launchPoint;
         _maxLaunchForce = _projectile.ShotStrength;

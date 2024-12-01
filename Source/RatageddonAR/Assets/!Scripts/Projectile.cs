@@ -4,6 +4,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class Projectile : PickableObject, IIngredient, IInteractable
 {
+    private Player _player;
     public int Damage => _damage;
     [SerializeField] private int _damage;
     public int ShotStrength => _shotStrength;
@@ -11,31 +12,49 @@ public class Projectile : PickableObject, IIngredient, IInteractable
     public float ExplosionRadius => _explosionRadius;
     [SerializeField] private float _explosionRadius;
 
+    public bool IsCooked { get; private set; }
+
+    public void Init(Player player)
+    {
+        GetComponentInChildren<Collider>().enabled = false;
+        _player = player;
+    }
+
     public override void Interact(Player player)
     {
         base.Interact(player);
     }
 
+    public void Cook()
+    {
+        GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+        GetComponentInChildren<Collider>().enabled = false;
+        IsCooked = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<IDamageable>() != null)
+        if (other.gameObject.GetComponent<IDamageable>() != null && _player.ItemInHand != null)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
-            foreach (var collider in colliders)
-            {
-                if (collider.TryGetComponent(out IDamageable dmgbl))
+            if (_player.ItemInHand != this) return;
+                Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+                foreach (var collider in colliders)
                 {
-                    dmgbl.GetDamage(_damage);
-                    Destroy(gameObject);
+                    if (collider.TryGetComponent(out IDamageable dmgbl))
+                    {
+                        dmgbl.GetDamage(_damage);
+                        Destroy(gameObject);
+                    }
                 }
-            }
         }
     }
 
     private void OnCollisionEnter(Collision col)
     {
+        Debug.Log(_player);
         if (col.gameObject.CompareTag("castle"))
         {
+            
             Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
             foreach (var collider in colliders)
             {

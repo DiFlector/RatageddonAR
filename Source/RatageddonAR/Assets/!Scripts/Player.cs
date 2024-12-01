@@ -53,7 +53,9 @@ public class Player : MonoBehaviour
     {
         Debug.Log("SPAWNED");
         int randIndex = Random.Range(0, _ingredientsPrefabs.Count);
-        ItemInHand = Instantiate(_ingredientsPrefabs[randIndex].gameObject, _anchor).GetComponent<PickableObject>();
+        Projectile proj = Instantiate(_ingredientsPrefabs[randIndex].gameObject, _anchor).GetComponent<Projectile>();
+        proj.Init(this);
+        ItemInHand = proj;
     }
 
     private IEnumerator AnimatePickup(Transform item)

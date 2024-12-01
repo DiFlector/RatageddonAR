@@ -59,6 +59,7 @@ public class LuckyBox : PickableObject, IInteractable
     {
         if (!_isExploding)
         {
+            _isExploding = true;
             _explosion.gameObject.SetActive(true);
             _explosion.transform.parent = null;
             _explosion.Play();
